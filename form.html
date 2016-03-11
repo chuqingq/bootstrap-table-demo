@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>测试</title>
+
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			// TODO 根据id去查找整个字段
+			$.get('/record.json?id=10', function(res) {
+				var record = JSON.parse(res);
+				for (var k in record) {
+					$('#'+k).val(record[k]);
+				}
+			});
+			// TODO 把值设置到每个input字段中，如果设置失败，报错（用于检测页面中缺少某些字段、和数据库不同步）
+		});
+	</script>
+</head>
+<body>
+	<form id="form" method="POST" action="/update">
+        <input type="hidden" name="id" id="id"/>
+        <label>名称</label>
+        <input type="text" name="name" id="name" placeholder="name" autofocus required="required" readonly="readonly">
+        <br>
+        <label>价格</label>
+        <input type="text" name="price" id="price" placeholder="price" autofocus required="required"></div>
+        <br>
+        <label>日期</label>
+        <input type="date" name="date" id="date" placeholder="date" autofocus required="required">
+        <br>
+        <label>分类</label>
+        <select name="category" id="category">
+            <option value="0">0.待定</option>
+            <option value="1">1.分类1</option>
+            <option value="2">2.分类2</option>
+            <option value="3">3.分类3</option>
+        </select>
+        <br>
+
+        <button id="submit" onclick="return submit();">提交</button>
+    </form>
+</body>
+</html>

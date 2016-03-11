@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>测试</title>
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.min.css"> -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script src="http://issues.wenzhixin.net.cn/bootstrap-table/assets/bootstrap-table/src/extensions/export/bootstrap-table-export.js"></script>
+    <script src="http://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+
+    <script src="http://issues.wenzhixin.net.cn/bootstrap-table/assets/bootstrap-table/src/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
+    <script src="http://issues.wenzhixin.net.cn/bootstrap-table/assets/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var columns = [{checkbox: true}].concat([{
+			        field: 'id',
+			        title: 'Item ID',
+			        sortable: true
+			    }, {
+			        field: 'name',
+			        title: 'Item Name',
+			        sortable: true,
+			        filterControl: 'input',
+			        // editable: {},
+			    }, {
+			        field: 'price',
+			        title: 'Item Price',
+			        sortable: true,
+			        filterControl: 'datepicker',
+			        // editable: {},
+			    }]);
+			$('#table').bootstrapTable({
+				// search: true,
+				showColumns: true,
+				showRefresh: true,
+				showToggle: true,
+				showPaginationSwitch: true,
+				showExport: true,
+				clickToSelect: true,
+				pagination: true,
+				sidePagination: 'server',
+				pageList: [10, 25, 50, 100, "All"],
+				selectItemName: 'radioName',
+				clickToSelect: true,
+				sortable: true,
+				sortName: 'id',
+				sortOrder: 'asc',
+			    columns: columns,
+			    filterControl: true,
+			    filterShowClear: true,
+			    editable: true,
+			    // data: 'db.json'
+			    // url: 'db.json'
+			});
+			// $.get('db.json', function(res) {
+			// 	var data = JSON.parse(res);
+
+			// })
+			$('#table').bootstrapTable('refresh', {silent: true, url: 'db.json'});
+		});
+	</script>
+</head>
+<body>
+	<!-- <a type="submit" class="btn btn-default" href="item_form.html" target="_blank">增加</a> -->
+	<button onclick="item_add();">增加</button>
+    <button onclick="item_delete();">删除</button>
+    <button onclick="item_update();">修改</button>
+	<table id="table" ></table>
+</body>
+</html>
